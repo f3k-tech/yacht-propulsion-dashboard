@@ -6,35 +6,29 @@ WORKDIR /app
 
 ARG VERSION
 
-# Copy package.json and other necessary files
 COPY package*.json ./
 
 RUN npm install
 
-# Copy the rest of the application code
 COPY . .
 
-# Development stage
-FROM base as development
-ENV NODE_ENV=development
+FROM base as dev-server
 EXPOSE 9000
 CMD ["quasar", "dev"]
 
-FROM base  as android-debug
+FROM base as android-debug-build
 CMD ["quasar", "build", "-m", "android", "--debug"]
 
-FROM base  as android-release
+FROM base as android-release-build
 CMD ["quasar", "build", "-m", "android", "--release"]
 
-# Production build for Webapp
-FROM base as build-webapp
-ENV NODE_ENV=production
-# Build the web application
+FROM base as web-production-build
+CMD ["quasar", "build"]
+
+FROM base as web-production-server-build
 RUN quasar build
 
-# Serve the webapp using a lightweight static server
-# Adjust the static server based on your preference (nginx, serve, etc.)
-FROM nginx:alpine as web-production
-COPY --from=build-webapp /app/dist/spa /usr/share/nginx/html
+FROM nginx:alpine as web-production-server
+COPY --from=web-production-server-build /app/dist/spa /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

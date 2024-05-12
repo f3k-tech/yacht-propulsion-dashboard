@@ -1,8 +1,8 @@
 services:
-  webapp:
+  web-production-server:
     build:
       context: .
-      target: web-production
+      target: web-production-server
     env_file:
       - ./docker.env
     volumes:

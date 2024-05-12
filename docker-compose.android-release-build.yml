@@ -2,7 +2,7 @@ services:
   android:
     build:
       context: .
-      target: android-debug
+      target: android-release-build
     env_file:
       - ./docker.env
     volumes:

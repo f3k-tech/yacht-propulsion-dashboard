@@ -1,13 +1,10 @@
 services:
-  dev-server:
+  web-production-build:
     build:
       context: .
-      target: dev-server
+      target: web-production-build
     env_file:
       - ./docker.env
     volumes:
       - .:/app
       - /app/node_modules
-      - /app/dist
-    ports:
-      - '9000:9000'
