@@ -1,6 +1,6 @@
 {
   "name": "yacht-propulsion-dashboard",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Predict and compare speed and ratio for both electric and combustion marine engines.",
   "productName": "Yacht Propulsion Dashboard",
   "author": "FreekO <info@f3k.tech>",
