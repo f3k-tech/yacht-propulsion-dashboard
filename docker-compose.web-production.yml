@@ -1,0 +1,12 @@
+services:
+  webapp:
+    build:
+      context: .
+      target: web-production
+    env_file:
+      - ./docker.env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '80:80'

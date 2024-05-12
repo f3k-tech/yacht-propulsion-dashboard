@@ -1,0 +1,12 @@
+services:
+  webapp:
+    build:
+      context: .
+      target: development
+    env_file:
+      - ./docker.env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '9000:9000'
